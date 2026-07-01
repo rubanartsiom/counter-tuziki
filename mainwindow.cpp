@@ -176,25 +176,28 @@ void MainWindow::checkWinner()
 {
     if (people.size() == 1)
     {
-        Person *winner = people[0];
-        winner->setPos(0, 0);
+        Person* champion = people[0];
+        champion->setPos(0, 0);
 
-        ui->label->setText(winner->getName() + " WON!");
+        ui->label->setText(champion->getName() + " WON!");
 
-        QPixmap crownPix("images/crown.png");
-
-        if (!crownPix.isNull())
+        QPixmap crown("images/crown.png");
+        if (!crown.isNull())
         {
-            crownItem = new QGraphicsPixmapItem(crownPix.scaled(50, 50));
-            QRectF rect = crownItem->boundingRect();
-            crownItem->setPos(
-                winner->x() + winner->boundingRect().width() / 2 - rect.width() / 2,
-                winner->y() - rect.height()
-                );
+            crownItem = new QGraphicsPixmapItem(crown.scaled(50, 50));
+            QRectF crownRect = crownItem->boundingRect();
+
+            qreal crownX = champion->x() + champion->boundingRect().width() / 2 - crownRect.width() / 2;
+            qreal crownY = champion->y() - crownRect.height();
+            crownItem->setPos(crownX, crownY);
+
             scene->addItem(crownItem);
         }
 
-        winSound->play();
+        if (winSound)
+        {
+            winSound->play();
+        }
     }
 }
 
