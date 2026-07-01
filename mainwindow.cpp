@@ -158,6 +158,9 @@ void MainWindow::removePerson(int index)
     if (people.isEmpty())
         return;
 
+    if (index < 0 || index >= people.size())
+        return;
+
     Person *p = people[index];
     p->setPos(p->x() + 300, p->y() - 300);
     scene->removeItem(p);
