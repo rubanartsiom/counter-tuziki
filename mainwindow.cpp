@@ -179,10 +179,9 @@ void MainWindow::checkWinner()
         Person *winner = people[0];
         winner->setPos(0, 0);
 
-        ui->label->setText(winner->getName() + " WON!");
+        ui->label->setText(QString("%1 WON!").arg(winner->getName()));
 
         QPixmap crownPix("images/crown.png");
-
         if (!crownPix.isNull())
         {
             crownItem = new QGraphicsPixmapItem(crownPix.scaled(50, 50));
@@ -194,7 +193,8 @@ void MainWindow::checkWinner()
             scene->addItem(crownItem);
         }
 
-        winSound->play();
+        if (winSound)
+            winSound->play();
     }
 }
 
