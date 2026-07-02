@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
+
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
@@ -90,7 +91,47 @@
 СЧИТАЛКУ</string>
     </property>
    </widget>
+   <widget class="QLabel" name="splashLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>950</width>
+      <height>801</height>
+     </rect>
+    </property>
+
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+
+    <property name="styleSheet">
+     <string notr="true">
+   background-color:white;
+   color:black;
+     </string>
+    </property>
+
+    <property name="text">
+     <string>Создана командой "Тузики"
+
+   Состав:
+
+   Рубан Артём
+   Корж Дарья
+   Сахарова Елизавета
+   Галуза Елизавета</string>
+    </property>
+   </widget>
   </widget>
+
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>

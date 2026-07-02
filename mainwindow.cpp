@@ -8,7 +8,7 @@
 #include <QCoreApplication>
 #include <QTextToSpeech>
 #include <QMessageBox>
-
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -48,6 +48,16 @@ MainWindow::MainWindow(QWidget *parent)
     speech->setRate(-0.2);
     speech->setVolume(1.0);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::showAbout);
+    ui->splashLabel->raise();
+    ui->splashLabel->show();
+
+    ui->centralwidget->setEnabled(false);
+
+    QTimer::singleShot(3000, this, [this]()
+                       {
+                           ui->splashLabel->hide();
+                           ui->centralwidget->setEnabled(true);
+                       });
 }
 
 MainWindow::~MainWindow()
