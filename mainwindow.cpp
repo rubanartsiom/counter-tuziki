@@ -77,28 +77,29 @@ void MainWindow::loadPoems()
 
 void MainWindow::loadPhotos()
 {
-    QDir dir(QCoreApplication::applicationDirPath() + "/photo");
-
-    QStringList files = dir.entryList(QStringList() << "*.jpg" << "*.png", QDir::Files);
-
-    for (QString file : files)
+    const QString photoPath = QCoreApplication::applicationDirPath() + "/photo";
+    QDir photoDir(photoPath);
+    
+    const QStringList imageFilters = {"*.jpg", "*.png"};
+    const QStringList imageFiles = photoDir.entryList(imageFilters, QDir::Files);
+    
+    for (const QString& fileName : imageFiles)
     {
-        QPixmap pix(dir.filePath(file));
-
-        if (!pix.isNull())
-        {
-            QString name = file.split(".")[0];
-
-            Person *p = new Person(name, pix.scaled(80, 80));
-            people.append(p);
-            scene->addItem(p);
-        }
+        QPixmap photo(photoDir.filePath(fileName));
+        
+        if (photo.isNull())
+            continue;
+        
+        const QString personName = fileName.section('.', 0, 0);
+        const QPixmap thumbnail = photo.scaled(80, 80, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        
+        Person* person = new Person(personName, thumbnail);
+        people.append(person);
+        scene->addItem(person);
     }
-
+    
     if (people.isEmpty())
-    {
         ui->label->setText("Нет фото!");
-    }
 }
 
 void MainWindow::arrangeCircle()
